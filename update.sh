@@ -290,7 +290,7 @@ isCrontabRunning()
 # Kiem tra Crontab da chay chua?
 isCrontabRunning
 
-echo "===============================  OpenNDS   ============================================="
+# echo "===============================  OpenNDS   ============================================="
 ###############################################################################################################################
 ###                                             OpenNDS
 ###############################################################################################################################
@@ -298,24 +298,24 @@ echo "===============================  OpenNDS   ===============================
 # Dam bao rang khi reboot, dich vu duoc khoi dong theo
 
 
-isOpenNDSRunning()
-{
-    cron_STATUS=`ndsctl status | grep "openNDS Status" | wc -l`
-    if [ $cron_STATUS -gt 0 ]
-    then
-        printf "openNDS: OK\n"
-    else
-        /usr/sbin/ipset create openndsset hash:ip
-        /etc/init.d/odhcpd restart 
-        /etc/init.d/firewall restart
-        /etc/init.d/network restart
-        /etc/init.d/opennds restart
-        printf "openNDS: Restarted\n"
-    fi
-}
+# isOpenNDSRunning()
+# {
+#     cron_STATUS=`ndsctl status | grep "openNDS Status" | wc -l`
+#     if [ $cron_STATUS -gt 0 ]
+#     then
+#         printf "openNDS: OK\n"
+#     else
+#         /usr/sbin/ipset create openndsset hash:ip
+#         /etc/init.d/odhcpd restart 
+#         /etc/init.d/firewall restart
+#         /etc/init.d/network restart
+#         /etc/init.d/opennds restart
+#         printf "openNDS: Restarted\n"
+#     fi
+# }
 
 # Kiem tra Crontab da chay chua?
-isOpenNDSRunning
+#isOpenNDSRunning
 
 printf "---------==============[ INSTALLATION COMPLETED! ] =================---------\n"
 
@@ -324,6 +324,6 @@ isNodeExporterRunning #?
 isPrometheuServerRunning #?
 isTTYDRunning #? 
 isCrontabRunning #?
-isOpenNDSRunning #?
+#isOpenNDSRunning #?
 
 printf "\nNote: Please reboot AP to make sure everything working exacely!!\n"
