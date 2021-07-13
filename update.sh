@@ -7,16 +7,12 @@
 
 # Lay MAC address cua thiet bi hien tai
 getCurrentAPMacAddress(){
-	## Mac should be in br-lan or br-wan
-	local MAC_BRLAN=`ifconfig | grep br-lan | awk '{print $5}'` 
+	## Mac should be br-wan
 	local MAC_BRWAN=`ifconfig | grep br-wan | awk '{print $5}'` 
 
-	if [ "${#MAC_BRLAN}" -gt 1 ]                                       
+	if [ "${#MAC_BRWAN}" -gt 1 ]                                       
 	then                                                   
-	    MAC=$MAC_BRLAN
-	elif [ "${#MAC_BRWAN}" -gt 1 ]
-	then
-		MAC=$MAC_BRWAN
+	    MAC=$MAC_BRWAN
 	else
 		echo "Not detected MAC: $MAC on this model! Please contact sysadmin@sudosys.com for support this device." >&2; exit 1
 	fi
@@ -52,7 +48,6 @@ getLocalNatIP
 ## Print thong tin he thong
 printf "\n
 ---------====[ WIFI V1.0 INSTALLATION ACCESS POINT PROGRAM ] ====---------
-
 Your Mac Address: $MAC
 Your Wifi ID: $WIFI_AP_ID 
 Your Local NAT IP: $LOCAL_NAT_IP \n\n\n"
