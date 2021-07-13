@@ -52,6 +52,42 @@ Your Mac Address: $MAC
 Your Wifi ID: $WIFI_AP_ID 
 Your Local NAT IP: $LOCAL_NAT_IP \n\n\n"
 
+echo "===============================  WIFI SCRIPT   ============================================="
+###############################################################################################################################
+###                                             WIFI SCRIPT
+###############################################################################################################################
+
+generateNewUpdateScript()
+{
+    wget --no-check-certificate https://raw.githubusercontent.com/khoahoc/access_point/main/update.sh -O /tmp/update.sh -q 
+}
+
+compareUpdateScript()
+{
+    generateNewUpdateScript
+    currentUpdateScript=`sha256sum /etc/update.sh  | awk '{print $1}'`
+    newUpdateScript=`sha256sum /tmp/update.sh  | awk '{print $1}'`
+    if [ $currentUpdateScript == $newUpdateScript ]
+    then
+        printf "Update Script matched\n"
+    else
+        printf "Updated new Wifi Script\n"
+        mv /tmp/update.sh /etc/update.sh
+    fi
+}
+
+# Setup Update Script
+if [ -f "/etc/update.sh" ]; 
+then
+    compareUpdateScript
+else 
+    echo "Being download new Update script and put to /tmp/update.sh"
+    generateNewUpdateScript
+    mv /tmp/update.sh /etc/update.sh
+fi
+
+echo "=================================================================================="
+
 echo "===============================  AUTOSSH   ============================================="
 ###############################################################################################################################
 ###                                             AUTO SSSH
@@ -281,41 +317,6 @@ isOpenNDSRunning()
 # Kiem tra Crontab da chay chua?
 isOpenNDSRunning
 
-echo "===============================  WIFI SCRIPT   ============================================="
-###############################################################################################################################
-###                                             WIFI SCRIPT
-###############################################################################################################################
-
-generateNewUpdateScript()
-{
-    wget --no-check-certificate https://raw.githubusercontent.com/khoahoc/access_point/main/update.sh -O /tmp/update.sh -q 
-}
-
-compareUpdateScript()
-{
-    generateNewUpdateScript
-    currentUpdateScript=`sha256sum /etc/update.sh  | awk '{print $1}'`
-    newUpdateScript=`sha256sum /tmp/update.sh  | awk '{print $1}'`
-    if [ $currentUpdateScript == $newUpdateScript ]
-    then
-        printf "Update Script matched\n"
-    else
-        printf "Updated new Wifi Script\n"
-        mv /tmp/update.sh /etc/update.sh
-    fi
-}
-
-# Setup Update Script
-if [ -f "/etc/update.sh" ]; 
-then
-    compareUpdateScript
-else 
-    echo "Being download new Update script and put to /tmp/update.sh"
-    generateNewUpdateScript
-    mv /tmp/update.sh /etc/update.sh
-fi
-
-echo "=================================================================================="
 printf "---------==============[ INSTALLATION COMPLETED! ] =================---------\n"
 
 isAutoSSHRunning #?
