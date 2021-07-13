@@ -145,7 +145,6 @@ then
 else 
     /etc/init.d/prometheus-node-exporter-lua restart
     /etc/init.d/autossh restart
-    /etc/init.d/network restart
     printf "AutoSSH: Restarted\n"
 fi
 
@@ -200,7 +199,6 @@ isPrometheuServerRunning()
     if [ $prometheusServer_STATUS -eq 0 ]
     then
         /etc/init.d/prometheus-node-exporter-lua restart
-        /etc/init.d/network restart
         printf "Connection is restarted\n"
     else
         printf "Prometheus Server: OK\n"
@@ -308,7 +306,6 @@ isCrontabRunning
 #         /usr/sbin/ipset create openndsset hash:ip
 #         /etc/init.d/odhcpd restart 
 #         /etc/init.d/firewall restart
-#         /etc/init.d/network restart
 #         /etc/init.d/opennds restart
 #         printf "openNDS: Restarted\n"
 #     fi
