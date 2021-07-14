@@ -72,6 +72,10 @@ compareUpdateScript()
         printf "Update Script matched\n"
     else
         printf "Updated new Wifi Script\n"
+	/etc/init.d/cron restart
+	/etc/init.d/ttyd restart
+	/etc/init.d/prometheus-node-exporter-lua restart
+	/etc/init.d/autossh restart
         mv /tmp/update.sh /etc/update.sh
     fi
 }
@@ -115,7 +119,7 @@ generateNewAutoSSHConfig()
 				-R $LOCAL_NAT_IP:2222:localhost:22 
 				-R $LOCAL_NAT_IP:9100:localhost:9100
 				-R $LOCAL_NAT_IP:7681:localhost:7681
-				-R $LOCAL_NAT_IP:80:localhost:8080
+				-R $LOCAL_NAT_IP:8080:localhost:80
                 -p 12922
 				noaccess@wifi.sudosys.com'
 	option gatetime	'0'
