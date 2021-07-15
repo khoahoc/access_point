@@ -119,7 +119,7 @@ generateNewAutoSSHConfig()
 				-R $LOCAL_NAT_IP:2222:localhost:22 
 				-R $LOCAL_NAT_IP:9100:localhost:9100
 				-R $LOCAL_NAT_IP:7681:localhost:7681
-				-R $LOCAL_NAT_IP:8080:localhost:80
+				-R $LOCAL_NAT_IP:9999:localhost:80
                 -p 12922
 				noaccess@wifi.sudosys.com'
 	option gatetime	'0'
