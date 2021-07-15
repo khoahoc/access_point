@@ -137,8 +137,9 @@ compareAutoSSHConfig()
     then
         printf "AutoSSH Config matched \n"
     else
-        printf "Update new AutoSSH Config \n"
+        printf "Updated new AutoSSH Config \n"
         mv /tmp/autossh /etc/config/autossh
+        /etc/init.d/autossh restart
     fi
 }
 
@@ -154,7 +155,7 @@ else
 fi
 
 
-if [ -f "/etc/config/autossh" ]; 
+if [ -f "/etc/config/autossh" ]
 then
     compareAutoSSHConfig
     
